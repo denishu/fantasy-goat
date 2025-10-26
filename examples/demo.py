@@ -176,8 +176,20 @@ def main():
     print("6. Player Analytics...")
     analyzer = PlayerAnalyzer(tracker)
     
-    # Add more games for trend analysis
+    # Add more games for trend analysis (need at least 6-7 games for meaningful trends)
     more_games = [
+        PlayerStats(
+            player_id="lbj23",
+            game_date=date(2024, 10, 10),
+            opponent="SAS",
+            points=18, rebounds=5, assists=4
+        ),
+        PlayerStats(
+            player_id="lbj23",
+            game_date=date(2024, 10, 12),
+            opponent="UTA",
+            points=19, rebounds=4, assists=5
+        ),
         PlayerStats(
             player_id="lbj23",
             game_date=date(2024, 10, 15),
@@ -194,9 +206,9 @@ def main():
     for game in more_games:
         tracker.add_game_stats(game)
     
-    trends = analyzer.get_trending_stats("lbj23", recent_games=3, comparison_games=5)
+    trends = analyzer.get_trending_stats("lbj23", recent_games=3, comparison_games=7)
     if trends:
-        print("   Performance Trends (last 3 vs previous games):")
+        print("   Performance Trends (last 3 vs previous 4 games):")
         for stat, change in trends.items():
             direction = "↑" if change > 0 else "↓" if change < 0 else "→"
             print(f"     {stat:20s}: {change:+6.1f}% {direction}")
